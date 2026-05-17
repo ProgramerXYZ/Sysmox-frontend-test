@@ -31,12 +31,17 @@ const SysmoxSidebar = (() => {
         collapse: "Collapse sidebar",
     };
 
+    const DEBUG = false;
     const DEBUG_PREFIX = "[Sysmox Sidebar]";
 
     let elements = {};
     let gestureStart = null;
 
     const log = (message, data = undefined) => {
+        if (!DEBUG) {
+            return;
+        }
+
         if (data === undefined) {
             console.log(DEBUG_PREFIX, message);
             return;
@@ -46,6 +51,10 @@ const SysmoxSidebar = (() => {
     };
 
     const warn = (message, data = undefined) => {
+        if (!DEBUG) {
+            return;
+        }
+
         if (data === undefined) {
             console.warn(DEBUG_PREFIX, message);
             return;
@@ -135,9 +144,20 @@ const SysmoxSidebar = (() => {
     };
 
     const restartAnimation = () => {
+        if (!elements.sidebar.classList.contains(CLASSES.animating)) {
+            elements.sidebar.classList.add(CLASSES.animating);
+            return;
+        }
+
         elements.sidebar.classList.remove(CLASSES.animating);
-        void elements.sidebar.offsetWidth;
-        elements.sidebar.classList.add(CLASSES.animating);
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                if (elements.sidebar) {
+                    elements.sidebar.classList.add(CLASSES.animating);
+                }
+            });
+        });
     };
 
     const setSidebarState = (isCollapsed, options = {}) => {
@@ -461,7 +481,10 @@ const SysmoxSidebar = (() => {
     };
 
     const init = () => {
-        console.groupCollapsed(`${DEBUG_PREFIX} Init`);
+        if (DEBUG) {
+            console.groupCollapsed(`${DEBUG_PREFIX} Init`);
+        }
+
         elements = getElements();
 
         log("Elements found.", {
@@ -471,7 +494,10 @@ const SysmoxSidebar = (() => {
         });
 
         if (!hasRequiredElements()) {
-            console.groupEnd();
+            if (DEBUG) {
+                console.groupEnd();
+            }
+
             return;
         }
 
@@ -485,7 +511,10 @@ const SysmoxSidebar = (() => {
         });
 
         log("Initialized successfully.");
-        console.groupEnd();
+
+        if (DEBUG) {
+            console.groupEnd();
+        }
     };
 
     return {

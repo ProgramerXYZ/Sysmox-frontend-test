@@ -1,0 +1,260 @@
+<!-- # Sysmox Frontend Layout (HTML + CSS)
+
+This is a frontend-only structure for Sysmox.
+
+Features included:
+
+* Sidebar navigation
+* Top bar
+* Dashboard cards
+* Chart containers
+* Process table section
+* Realtime-style monitoring layout
+* Proper IDs for JavaScript integration later
+* Dark modern UI
+* Responsive structure
+
+---
+
+# HTML
+
+```html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sysmox</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="app-container">
+
+        <!-- SIDEBAR -->
+
+        <aside id="sidebar">
+            <div id="sidebar-top-section">
+
+                <button id="sidebar-toggle-button">
+
+                    ☰
+
+                </button>
+
+            </div>
+
+            <div id="logo-container">
+                <h1 id="logo-text">SYSMOX</h1>
+            </div>
+
+            <nav id="sidebar-nav">
+
+                <button class="nav-button" id="dashboard-button">
+                    Dashboard
+                </button>
+
+                <button class="nav-button" id="processes-button">
+                    Processes
+                </button>
+
+                <button class="nav-button" id="network-button">
+                    Network
+                </button>
+
+                <button class="nav-button" id="storage-button">
+                    Storage
+                </button>
+
+                <button class="nav-button" id="settings-button">
+                    Settings
+                </button>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main id="main-content">
+
+            <!-- TOPBAR -->
+
+            <header id="topbar">
+
+                <div id="system-status-container">
+
+                    <div class="status-dot" id="status-dot"></div>
+
+                    <span id="system-status-text">
+                        System Running
+                    </span>
+
+                </div>
+
+
+                <div id="topbar-right-section">
+
+                    <div id="clock-container">
+                        <span id="clock-text">00:00:00</span>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- DASHBOARD GRID -->
+
+            <section id="dashboard-grid">
+
+                <!-- CPU CARD -->
+
+                <div class="stat-card" id="cpu-card">
+
+                    <div class="card-header">
+                        <h2>CPU</h2>
+                        <span id="cpu-percentage">0%</span>
+                    </div>
+
+                    <div class="chart-container" id="cpu-chart"></div>
+
+                </div>
+
+
+                <!-- RAM CARD -->
+
+                <div class="stat-card" id="ram-card">
+
+                    <div class="card-header">
+                        <h2>RAM</h2>
+                        <span id="ram-percentage">0%</span>
+                    </div>
+
+                    <div class="chart-container" id="ram-chart"></div>
+
+                </div>
+
+
+                <!-- GPU CARD -->
+
+                <div class="stat-card" id="gpu-card">
+
+                    <div class="card-header">
+                        <h2>GPU</h2>
+                        <span id="gpu-percentage">0%</span>
+                    </div>
+
+                    <div class="chart-container" id="gpu-chart"></div>
+
+                </div>
+
+
+                <!-- NETWORK CARD -->
+
+                <div class="stat-card" id="network-card">
+
+                    <div class="card-header">
+                        <h2>Network</h2>
+                        <span id="network-speed">0 KB/s</span>
+                    </div>
+
+                    <div class="chart-container" id="network-chart"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SYSTEM DETAILS -->
+
+            <section id="system-details-section">
+
+                <div id="system-info-card">
+
+                    <div class="section-title-container">
+                        <h2>System Information</h2>
+                    </div>
+
+                    <div id="system-info-grid">
+
+                        <div class="info-box">
+                            <span class="info-label">OS</span>
+                            <span class="info-value" id="os-name">Unknown</span>
+                        </div>
+
+                        <div class="info-box">
+                            <span class="info-label">CPU</span>
+                            <span class="info-value" id="cpu-name">Unknown</span>
+                        </div>
+
+                        <div class="info-box">
+                            <span class="info-label">RAM</span>
+                            <span class="info-value" id="total-ram">Unknown</span>
+                        </div>
+
+                        <div class="info-box">
+                            <span class="info-label">Temperature</span>
+                            <span class="info-value" id="system-temp">0°C</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PROCESS TABLE -->
+
+            <section id="process-section">
+
+                <div class="section-title-container">
+                    <h2>Running Processes</h2>
+                </div>
+
+                <div id="process-table-container">
+
+                    <table id="process-table">
+
+                        <thead>
+                            <tr>
+                                <th>Process</th>
+                                <th>CPU</th>
+                                <th>RAM</th>
+                                <th>PID</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="process-table-body">
+
+                            <tr>
+                                <td>example.exe</td>
+                                <td>12%</td>
+                                <td>250 MB</td>
+                                <td>1234</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="animations.js" defer></script>
+
+</body>
+</html>
+```
+
+---
+
